@@ -1,8 +1,0 @@
-prefix=/home/lke/kusv_ke/kusv_ros/devel
-
-Name: astar_planner
-Description: Description of astar_planner
-Version: 1.10.0
-Cflags: 
-Libs: -L/home/lke/kusv_ke/kusv_ros/devel/lib 
-Requires: roscpp std_msgs tf waypoint_follower autoware_msgs vector_map

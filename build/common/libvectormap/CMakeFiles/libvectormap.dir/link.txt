@@ -1,2 +1,0 @@
-/usr/bin/ar qc /home/lke/kusv_ke/kusv_ros/devel/lib/liblibvectormap.a  CMakeFiles/libvectormap.dir/src/vector_map.cpp.o
-/usr/bin/ranlib /home/lke/kusv_ke/kusv_ros/devel/lib/liblibvectormap.a
