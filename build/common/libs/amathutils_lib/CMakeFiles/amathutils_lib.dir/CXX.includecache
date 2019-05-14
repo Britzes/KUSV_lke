@@ -1,0 +1,18 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/lke/kusv_ke/kusv_ros/src/common/libs/amathutils_lib/include/amathutils_lib/amathutils.hpp
+cmath
+-
+iostream
+-
+
+/home/lke/kusv_ke/kusv_ros/src/common/libs/amathutils_lib/src/Amathutils.cpp
+amathutils_lib/amathutils.hpp
+/home/lke/kusv_ke/kusv_ros/src/common/libs/amathutils_lib/src/amathutils_lib/amathutils.hpp
+

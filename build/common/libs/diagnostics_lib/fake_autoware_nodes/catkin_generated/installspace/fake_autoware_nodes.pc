@@ -1,0 +1,8 @@
+prefix=/home/lke/kusv_ke/kusv_ros/install
+
+Name: fake_autoware_nodes
+Description: Description of fake_autoware_nodes
+Version: 1.10.0
+Cflags: -I/home/lke/kusv_ke/kusv_ros/install/include
+Libs: -L/home/lke/kusv_ke/kusv_ros/install/lib 
+Requires: geometry_msgs roscpp rospy sensor_msgs std_msgs diag_lib

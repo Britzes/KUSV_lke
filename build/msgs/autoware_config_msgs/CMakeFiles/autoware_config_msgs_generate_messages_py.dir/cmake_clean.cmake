@@ -1,0 +1,40 @@
+file(REMOVE_RECURSE
+  "CMakeFiles/autoware_config_msgs_generate_messages_py"
+  "/home/lke/kusv_ke/kusv_ros/devel/lib/python2.7/dist-packages/autoware_config_msgs/msg/_ConfigTwistFilter.py"
+  "/home/lke/kusv_ke/kusv_ros/devel/lib/python2.7/dist-packages/autoware_config_msgs/msg/_ConfigCarFusion.py"
+  "/home/lke/kusv_ke/kusv_ros/devel/lib/python2.7/dist-packages/autoware_config_msgs/msg/_ConfigApproximateNDTMapping.py"
+  "/home/lke/kusv_ke/kusv_ros/devel/lib/python2.7/dist-packages/autoware_config_msgs/msg/_ConfigNDTMappingOutput.py"
+  "/home/lke/kusv_ke/kusv_ros/devel/lib/python2.7/dist-packages/autoware_config_msgs/msg/_ConfigSSD.py"
+  "/home/lke/kusv_ke/kusv_ros/devel/lib/python2.7/dist-packages/autoware_config_msgs/msg/_ConfigLaneStop.py"
+  "/home/lke/kusv_ke/kusv_ros/devel/lib/python2.7/dist-packages/autoware_config_msgs/msg/_ConfigRayGroundFilter.py"
+  "/home/lke/kusv_ke/kusv_ros/devel/lib/python2.7/dist-packages/autoware_config_msgs/msg/_ConfigVoxelGridFilter.py"
+  "/home/lke/kusv_ke/kusv_ros/devel/lib/python2.7/dist-packages/autoware_config_msgs/msg/_ConfigPedestrianFusion.py"
+  "/home/lke/kusv_ke/kusv_ros/devel/lib/python2.7/dist-packages/autoware_config_msgs/msg/_ConfigRandomFilter.py"
+  "/home/lke/kusv_ke/kusv_ros/devel/lib/python2.7/dist-packages/autoware_config_msgs/msg/_ConfigRingGroundFilter.py"
+  "/home/lke/kusv_ke/kusv_ros/devel/lib/python2.7/dist-packages/autoware_config_msgs/msg/_ConfigWaypointLoader.py"
+  "/home/lke/kusv_ke/kusv_ros/devel/lib/python2.7/dist-packages/autoware_config_msgs/msg/_ConfigPoints2Polygon.py"
+  "/home/lke/kusv_ke/kusv_ros/devel/lib/python2.7/dist-packages/autoware_config_msgs/msg/_ConfigVelocitySet.py"
+  "/home/lke/kusv_ke/kusv_ros/devel/lib/python2.7/dist-packages/autoware_config_msgs/msg/_ConfigWaypointFollower.py"
+  "/home/lke/kusv_ke/kusv_ros/devel/lib/python2.7/dist-packages/autoware_config_msgs/msg/_ConfigCarKF.py"
+  "/home/lke/kusv_ke/kusv_ros/devel/lib/python2.7/dist-packages/autoware_config_msgs/msg/_ConfigCompareMapFilter.py"
+  "/home/lke/kusv_ke/kusv_ros/devel/lib/python2.7/dist-packages/autoware_config_msgs/msg/_ConfigCarDPM.py"
+  "/home/lke/kusv_ke/kusv_ros/devel/lib/python2.7/dist-packages/autoware_config_msgs/msg/_ConfigDistanceFilter.py"
+  "/home/lke/kusv_ke/kusv_ros/devel/lib/python2.7/dist-packages/autoware_config_msgs/msg/_ConfigLaneSelect.py"
+  "/home/lke/kusv_ke/kusv_ros/devel/lib/python2.7/dist-packages/autoware_config_msgs/msg/_ConfigLaneRule.py"
+  "/home/lke/kusv_ke/kusv_ros/devel/lib/python2.7/dist-packages/autoware_config_msgs/msg/_ConfigICP.py"
+  "/home/lke/kusv_ke/kusv_ros/devel/lib/python2.7/dist-packages/autoware_config_msgs/msg/_ConfigPlannerSelector.py"
+  "/home/lke/kusv_ke/kusv_ros/devel/lib/python2.7/dist-packages/autoware_config_msgs/msg/_ConfigDecisionMaker.py"
+  "/home/lke/kusv_ke/kusv_ros/devel/lib/python2.7/dist-packages/autoware_config_msgs/msg/_ConfigRingFilter.py"
+  "/home/lke/kusv_ke/kusv_ros/devel/lib/python2.7/dist-packages/autoware_config_msgs/msg/_ConfigPedestrianDPM.py"
+  "/home/lke/kusv_ke/kusv_ros/devel/lib/python2.7/dist-packages/autoware_config_msgs/msg/_ConfigLatticeVelocitySet.py"
+  "/home/lke/kusv_ke/kusv_ros/devel/lib/python2.7/dist-packages/autoware_config_msgs/msg/_ConfigNDTMapping.py"
+  "/home/lke/kusv_ke/kusv_ros/devel/lib/python2.7/dist-packages/autoware_config_msgs/msg/_ConfigRcnn.py"
+  "/home/lke/kusv_ke/kusv_ros/devel/lib/python2.7/dist-packages/autoware_config_msgs/msg/_ConfigPedestrianKF.py"
+  "/home/lke/kusv_ke/kusv_ros/devel/lib/python2.7/dist-packages/autoware_config_msgs/msg/_ConfigNDT.py"
+  "/home/lke/kusv_ke/kusv_ros/devel/lib/python2.7/dist-packages/autoware_config_msgs/msg/__init__.py"
+)
+
+# Per-language clean rules from dependency scanning.
+foreach(lang )
+  include(CMakeFiles/autoware_config_msgs_generate_messages_py.dir/cmake_clean_${lang}.cmake OPTIONAL)
+endforeach()

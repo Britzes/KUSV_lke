@@ -1,0 +1,8 @@
+prefix=/home/lke/kusv_ke/kusv_ros/devel
+
+Name: pcl_omp_registration
+Description: Description of pcl_omp_registration
+Version: 1.10.0
+Cflags: -I/home/lke/kusv_ke/kusv_ros/src/perception/localization/libs/pcl_omp_registration/include
+Libs: -L/home/lke/kusv_ke/kusv_ros/devel/lib -lpcl_omp_registration
+Requires: 

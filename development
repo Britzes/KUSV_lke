@@ -1,31 +1,99 @@
 
+<sensing> : velodyne
+
+node.advertise<sensor_msgs::PointCloud2>("velodyne_points", 10);
+
+<sensing> : voxel_grid_filter
+
+input
+private_nh.getParam("points_topic", POINTS_TOPIC);
+ros::Subscriber scan_sub = nh.subscribe(POINTS_TOPIC, 10, scan_callback);
+
+output
+filtered_points_pub = nh.advertise<sensor_msgs::PointCloud2>("/filtered_points", 10);
+
+<detection> : trafficlight_recognizer
+
+input
+private_nh.param<std::string>("image_raw_topic", image_topic_name, "/image_raw");
+	private_nh.param<std::string>("camera_light_color_topic", camera_light_color_topic_name, "/camera_light_color");
+
+	ros::Subscriber image_sub = n.subscribe(image_topic_name, 1, image_raw_cb);
+	ros::Subscriber position_sub = n.subscribe("/roi_signal", 1, extractedPos_cb);
+	ros::Subscriber tunedResult_sub = n.subscribe("/tuned_result", 1, tunedResult_cb);
+
+output
+signalState_pub = n.advertise<autoware_msgs::TrafficLight>(camera_light_color_topic_name, ADVERTISE_QUEUE_SIZE, ADVERTISE_LATCH);
+	signalStateString_pub = n.advertise<std_msgs::String>("/sound_player", ADVERTISE_QUEUE_SIZE);
+	marker_pub = n.advertise<visualization_msgs::MarkerArray>("tlr_result", ADVERTISE_QUEUE_SIZE);
+	superimpose_image_pub = n.advertise<sensor_msgs::Image>("tlr_superimpose_image", ADVERTISE_QUEUE_SIZE);
+
+	signal_state_array_publisher_ = n.advertise<autoware_msgs::TrafficLightResultArray>("tlr_result_array", ADVERTISE_QUEUE_SIZE);
+
+<detection> : vision_darknet_detect
+
+input
+ROS_INFO("Subscribing to... %s", image_raw_topic_str.c_str());
+subscriber_image_raw_ = node_handle_.subscribe(image_raw_topic_str, 1, &Yolo3DetectorNode::image_callback, this);
+
+output
+publisher_objects_ = node_handle_.advertise<autoware_msgs::DetectedObjectArray>("/detection/image_detector/objects", 1);
+
+<detection> : vision_lane_detect
+
+input
+  private_nh.param<std::string>("image_raw_topic", image_topic_name, "/image_raw");
+  ROS_INFO("Setting image topic to %s", image_topic_name.c_str());
+
+  ros::Subscriber subscriber = n.subscribe(image_topic_name, 1, lane_cannyhough_callback);
+
+output
+image_lane_objects = n.advertise<autoware_msgs::ImageLaneObjects>("lane_pos_xy", 1);
+
+<detection> : lidar_euclidean_cluster_detect
+
+input
+points_topic = "/points_raw";
+sub = h.subscribe(points_topic, 1, velodyne_callback);
+
+output
+  _pub_cluster_cloud = h.advertise<sensor_msgs::PointCloud2>("/points_cluster", 1);
+  _pub_ground_cloud = h.advertise<sensor_msgs::PointCloud2>("/points_ground", 1);
+  _centroid_pub = h.advertise<autoware_msgs::Centroids>("/cluster_centroids", 1);
+  _pub_points_lanes_cloud = h.advertise<sensor_msgs::PointCloud2>("/points_lanes", 1);
+  _pub_clusters_message = h.advertise<autoware_msgs::CloudClusterArray>("/detection/lidar_detector/cloud_clusters", 1);
+  _pub_detected_objects = h.advertise<autoware_msgs::DetectedObjectArray>("/detection/lidar_detector/objects", 1);
+
+<detection> : lidar_euclidean_track
+
+input
+cluster_centroids_sub = n.subscribe("/cloud_clusters_class", 1, cluster_cb);
+
+output
+  tracked_pub = n.advertise<autoware_msgs::DetectedObjectArray>("/detected_objects", 1);
+  tracked_bba_pub = n.advertise<jsk_recognition_msgs::BoundingBoxArray>("/cloud_cluster_tracked_bounding_box", 1);
+  tracked_bba_textlabel_pub = n.advertise<visualization_msgs::MarkerArray>("/cloud_cluster_tracked_text", 1);
+
+<localization> : nmea2tfpose
+
+input
+sub1_ = nh_.subscribe("nmea_sentence", 100, &Nmea2TFPoseNode::callbackFromNmeaSentence, this);
+
+output
+pub1_ = nh_.advertise<geometry_msgs::PoseStamped>("gnss_pose", 10);
+
 <localization> : ndt_matching
 
 input
 // Subscribers
-param_sub = nh.subscribe("config/ndt", 10, param_callback);
-gnss_sub = nh.subscribe("gnss_pose", 10, gnss_callback);
-initialpose_sub = nh.subscribe("initialpose", 10, initialpose_callback);
-points_sub = nh.subscribe("filtered_points", _queue_size, points_callback);
-odom_sub = nh.subscribe("/vehicle/odom", _queue_size * 10, odom_callback);
-imu_sub = nh.subscribe(_imu_topic.c_str(), _queue_size * 10, imu_callback);
+output_sub = nh.subscribe("config/ndt_mapping_output", 10, output_callback);
+points_sub = nh.subscribe("points_raw", 100000, points_callback); -> "filtered_points"로 바꿔야함
+odom_sub = nh.subscribe("/vehicle/odom", 100000, odom_callback);
+imu_sub = nh.subscribe(_imu_topic, 100000, imu_callback);
 
 output
-// Publishers
-predict_pose_pub = nh.advertise<geometry_msgs::PoseStamped>("/predict_pose", 10);
-predict_pose_imu_pub = nh.advertise<geometry_msgs::PoseStamped>("/predict_pose_imu", 10);
-predict_pose_odom_pub = nh.advertise<geometry_msgs::PoseStamped>("/predict_pose_odom", 10);
-predict_pose_imu_odom_pub = nh.advertise<geometry_msgs::PoseStamped>("/predict_pose_imu_odom", 10);
-ndt_pose_pub = nh.advertise<geometry_msgs::PoseStamped>("/ndt_pose", 10);
-// current_pose_pub = nh.advertise<geometry_msgs::PoseStamped>("/current_pose", 10);
-localizer_pose_pub = nh.advertise<geometry_msgs::PoseStamped>("/localizer_pose", 10);
-estimate_twist_pub = nh.advertise<geometry_msgs::TwistStamped>("/estimate_twist", 10);
-estimated_vel_mps_pub = nh.advertise<std_msgs::Float32>("/estimated_vel_mps", 10);
-estimated_vel_kmph_pub = nh.advertise<std_msgs::Float32>("/estimated_vel_kmph", 10);
-estimated_vel_pub = nh.advertise<geometry_msgs::Vector3Stamped>("/estimated_vel", 10);
-time_ndt_matching_pub = nh.advertise<std_msgs::Float32>("/time_ndt_matching", 10);
-ndt_stat_pub = nh.advertise<autoware_msgs::NDTStat>("/ndt_stat", 10);
-ndt_reliability_pub = nh.advertise<std_msgs::Float32>("/ndt_reliability", 10);
+  ndt_map_pub = nh.advertise<sensor_msgs::PointCloud2>("/ndt_map", 1000);
+  current_pose_pub = nh.advertise<geometry_msgs::PoseStamped>("/current_pose", 1000);
 
 <decision>
 

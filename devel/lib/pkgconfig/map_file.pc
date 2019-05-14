@@ -1,0 +1,8 @@
+prefix=/home/lke/kusv_ke/kusv_ros/devel
+
+Name: map_file
+Description: Description of map_file
+Version: 1.10.0
+Cflags: 
+Libs: -L/home/lke/kusv_ke/kusv_ros/devel/lib 
+Requires: 

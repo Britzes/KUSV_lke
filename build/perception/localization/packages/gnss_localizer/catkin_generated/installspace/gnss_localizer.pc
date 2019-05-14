@@ -1,0 +1,8 @@
+prefix=/home/lke/kusv_ke/kusv_ros/install
+
+Name: gnss_localizer
+Description: Description of gnss_localizer
+Version: 1.10.0
+Cflags: 
+Libs: -L/home/lke/kusv_ke/kusv_ros/install/lib 
+Requires: 

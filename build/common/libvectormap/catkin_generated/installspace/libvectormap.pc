@@ -1,0 +1,8 @@
+prefix=/home/lke/kusv_ke/kusv_ros/install
+
+Name: libvectormap
+Description: Description of libvectormap
+Version: 1.10.0
+Cflags: -I/home/lke/kusv_ke/kusv_ros/install/include -I/usr/include/eigen3
+Libs: -L/home/lke/kusv_ke/kusv_ros/install/lib -llibvectormap
+Requires: vector_map
