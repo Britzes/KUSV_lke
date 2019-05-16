@@ -45,6 +45,10 @@ __pycache__/
 .pydevproject
 .settings/
 
+# QtCreator
+.workspace
+.workspace.user
+
 # Visual Studio Code
 .vscode/
 
